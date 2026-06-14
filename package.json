@@ -1,16 +1,16 @@
 {
   "name": "@duta/sdk",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Official Duta SDK — transactional email for developers.",
   "license": "MIT",
   "author": "Duta",
   "homepage": "https://duta.indra.sh",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Fawwazs17/duta-js.git"
+    "url": "https://github.com/indra-sh/duta-js.git"
   },
   "bugs": {
-    "url": "https://github.com/Fawwazs17/duta-js/issues"
+    "url": "https://github.com/indra-sh/duta-js/issues"
   },
   "keywords": [
     "duta",
