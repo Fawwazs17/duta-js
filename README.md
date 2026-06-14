@@ -35,6 +35,70 @@ if (error) {
 
 Grab an API key from the [dashboard](https://app.duta.indra.sh). Note that the sender domain has to be verified in your account before it'll send.
 
+## Usage in your project
+
+Instantiate the client once at the module level so it is reused across requests, not recreated on every call.
+
+**Next.js / Express / NestJS / any Node.js server**
+
+Store your key in `.env` (or `.env.local` for Next.js):
+
+```
+DUTA_API_KEY=duta_live_xxx
+```
+
+Then create the client once:
+
+```ts
+// lib/mailer.ts
+import { Duta } from "@duta/sdk";
+
+export const duta = new Duta(process.env.DUTA_API_KEY!);
+```
+
+And import it wherever you need to send:
+
+```ts
+// app/api/welcome/route.ts  (Next.js App Router)
+import { duta } from "@/lib/mailer";
+
+export async function POST(req: Request) {
+  const { email, name } = await req.json();
+
+  const { data, error } = await duta.emails.send({
+    from: "hello@yourdomain.com",
+    to: email,
+    subject: `Welcome, ${name}!`,
+    html: `<p>Hey ${name}, thanks for signing up.</p>`,
+  });
+
+  if (error) return Response.json({ error: error.message }, { status: 500 });
+  return Response.json({ id: data.id });
+}
+```
+
+**Cloudflare Workers / Hono**
+
+Workers don't have module-level environment variables, so instantiate per request using `c.env`:
+
+```ts
+import { Duta } from "@duta/sdk";
+
+app.post("/welcome", async (c) => {
+  const duta = new Duta(c.env.DUTA_API_KEY);
+
+  const { data, error } = await duta.emails.send({
+    from: "hello@yourdomain.com",
+    to: "user@example.com",
+    subject: "Welcome!",
+    html: "<p>Thanks for signing up.</p>",
+  });
+
+  if (error) return c.json({ error: error.message }, 500);
+  return c.json({ id: data.id });
+});
+```
+
 ## Sending
 
 `to` takes one address or an array:
