@@ -21,12 +21,12 @@ const DEFAULT_BASE_URL = "https://api.duta.indra.sh";
  * ```
  */
 export class Duta {
-  /** The `emails` resource — send, retrieve, and list emails. */
+  /** The `emails` resource: send, retrieve, and list emails. */
   readonly emails: Emails;
 
   /**
    * @param apiKey  Your Duta API key (`duta_live_...`). Create one in the dashboard.
-   * @param options Optional overrides — custom `baseUrl` or `fetch` implementation.
+   * @param options Optional overrides: custom `baseUrl` or `fetch` implementation.
    */
   constructor(apiKey: string, options: DutaOptions = {}) {
     if (!apiKey) {

@@ -19,7 +19,7 @@ export interface RequestContext {
 }
 
 /**
- * The `emails` resource — send, retrieve, and list emails.
+ * The `emails` resource: send, retrieve, and list emails.
  * Accessed via `duta.emails`.
  */
 export class Emails {

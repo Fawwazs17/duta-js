@@ -55,7 +55,7 @@ export function toDutaError(statusCode: number, body: unknown): DutaError {
 }
 
 /**
- * Error used when the network request itself fails (DNS, timeout, offline) —
+ * Error used when the network request itself fails (DNS, timeout, offline):
  * i.e. we never got an HTTP response.
  */
 export function networkError(message: string): DutaError {
